@@ -4,7 +4,7 @@ An MCP server exposing Southeast Asian language tools — variant detection, tra
 
 **What this is.** A specialist sidecar for agents, not a replacement for your main model. Your assistant keeps doing general reasoning; SEA-LION gets called when Southeast Asian language, culture, or safety is the bottleneck.
 
-**Status.** v0.1, pre-alpha. Three tools, MCP stdio and HTTP transports, hosted backend only. Local inference, OpenAI-compatible HTTP, and additional tools (`voice_respond`, `cultural_review`, `extract_structured`, `rag_query`) land in v0.2. See `CLAUDE.md` for the v0.1 plan.
+**Status.** v0.1, pre-alpha. Three tools, MCP stdio and HTTP transports, hosted backend only. See `CLAUDE.md` for the v0.1 plan.
 
 ## Tools
 

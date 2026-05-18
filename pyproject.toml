@@ -3,8 +3,8 @@ name = "sealion-sidecar"
 version = "0.1.0"
 description = "SEA-LION Sidecar — MCP server exposing Southeast Asian language tools (translate/localize, language variant detection, safety, voice) backed by AI Singapore's hosted SEA-LION API."
 readme = "README.md"
-requires-python = ">=3.11"
-license = { text = "Apache-2.0" }
+requires-python = ">=3.13"
+license = { text = "MIT" }
 authors = [
   { name = "AI Singapore" },
 ]
@@ -42,7 +42,7 @@ packages = ["sealion_sidecar"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py313"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM"]

@@ -42,7 +42,7 @@ cd SEA-LION_mcp
 uv sync
 ```
 
-Requires Python 3.11+ and [`uv`](https://github.com/astral-sh/uv).
+Requires Python 3.13+. [`uv`](https://github.com/astral-sh/uv) is the recommended package manager.
 
 ## Get an API key
 
@@ -318,10 +318,6 @@ In the same **MCP Servers** panel, add:
 
 LM Studio spawns the sidecar as a subprocess. No separate server process needed.
 
-### Anything OpenAI-compatible
-
-Not yet — the OpenAI-compatible HTTP server (`sealion serve`) is v0.1.1.
-
 ## Evals
 
 One eval per tool, runnable locally:
@@ -365,10 +361,9 @@ Then add a `@mcp.tool()` decorated handler inside `build_mcp()` in `mcp_server.p
 
 ## Limitations
 
-- **Rate limit.** 10 req/min per user. A voice demo with concurrent callers will hit it.
+- **Rate limit.** 10 req/min per user for the SEA-LION API Key still applies to MCP calls as well.
 - **`safety_check` is advisory.** SEA-Guard is a classifier, not a decisional moderation system. The `category` enum is intentionally two-value (`safe`, `sensitive_content`) — read `raw_output` for richer detail.
-- **No embeddings hosted.** SEA-Embedding is HuggingFace/local only, so RAG tooling is out of v0.1 scope.
-- **No streaming.** Tools return single responses. Streaming voice is v0.2.
+- **No streaming.** Tools return single responses. 
 
 ## Routing policy (for the host agent)
 

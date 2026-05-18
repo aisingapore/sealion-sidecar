@@ -34,11 +34,17 @@ The following examples show the tools in action inside LM Studio.
 
 ![Manglish AWS documentation answer](screenshots/manglish-aws-docs.png)
 
+## Try it out
+
+To try out the MCP server, [get a SEA-LION API key](#get-an-api-key) and proceed to [set up your AI interface](#wire-into-your-agent), using `https://api.sea-lion.ai/mcp/sealion` as the server URL, and insert your API key as per the setup instructions.
+
+To deploy your own MCP server, proceed with the following instructions from <u>[Install](#install)</u> onwards.
+
 ## Install
 
 ```bash
-git clone <repo>
-cd SEA-LION_mcp
+git clone https://github.com/aisingapore/sealion-sidecar.git
+cd sealion-sidecar
 uv sync
 ```
 

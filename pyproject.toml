@@ -1,0 +1,56 @@
+[project]
+name = "sealion-sidecar"
+version = "0.1.0"
+description = "SEA-LION Sidecar — MCP server exposing Southeast Asian language tools (translate/localize, language variant detection, safety, voice) backed by AI Singapore's hosted SEA-LION API."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [
+  { name = "AI Singapore" },
+]
+dependencies = [
+  "fastmcp>=2.0",
+  "openai>=1.40.0",
+  "jsonschema>=4.22.0",
+  "pyyaml>=6.0",
+  "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-asyncio>=0.23",
+  "ruff==0.15.12",
+]
+evals = [
+  "anthropic>=0.40",
+]
+
+[project.scripts]
+sealion = "sealion_sidecar.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["sealion_sidecar"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"sealion_sidecar/schemas" = "sealion_sidecar/schemas"
+"sealion_sidecar/prompts" = "sealion_sidecar/prompts"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# Eval datasets carry inline natural-language prompts that don't wrap usefully.
+"sealion_sidecar/evals/*.py" = ["E501"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

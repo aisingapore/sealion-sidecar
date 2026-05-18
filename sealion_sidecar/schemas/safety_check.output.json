@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "safety_check.output",
+  "type": "object",
+  "properties": {
+    "safe": {
+      "type": "boolean"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["safe", "sensitive_content"],
+      "description": "Stable two-value label. 'sensitive_content' covers everything SEA-Guard flags as unsafe."
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["prompt_only", "prompt_response", "response_only"]
+    },
+    "model": {
+      "type": "string"
+    },
+    "raw_output": {
+      "type": "string",
+      "description": "Verbatim model response. Inspect this for richer detail if SEA-Guard returns more than safe/unsafe."
+    },
+    "advisory_note": {
+      "type": "string"
+    }
+  },
+  "required": ["safe", "category", "mode", "model", "raw_output", "advisory_note"],
+  "additionalProperties": false
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "detect_language_variant.output",
+  "type": "object",
+  "properties": {
+    "languages": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1,
+      "description": "Languages present in the text (lowercase names)."
+    },
+    "variant": {
+      "type": "string",
+      "description": "Regional variant label in snake_case (e.g. singapore_colloquial_english), or 'standard'."
+    },
+    "code_switching": {
+      "type": "boolean",
+      "description": "True if the text mixes more than one language."
+    },
+    "register": {
+      "type": "string",
+      "enum": ["formal", "informal", "neutral", "colloquial"]
+    },
+    "notes": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Short observations about slang, particles, code-switching cues."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "model": {
+      "type": "string",
+      "description": "Model ID that produced this answer."
+    }
+  },
+  "required": ["languages", "variant", "code_switching", "register", "notes", "confidence", "model"],
+  "additionalProperties": false
+}

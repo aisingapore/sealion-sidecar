@@ -1,0 +1,40 @@
+# Example SEA-LION Sidecar config.
+# Copy to ~/.sealion/config.yaml and export SEALION_API_KEY=<your key from the SEA-LION Playground>.
+
+api:
+  base_url: https://api.sea-lion.ai/v1
+  key_env: SEALION_API_KEY
+  # Rate limiting is enforced server-side per API key (contact sealion@aisingapore.org for increases).
+  retry_max_attempts: 3
+  allow_env_key_fallback: false   # When true, HTTP requests without a Bearer key fall back to
+                                  # the server's own env API key (SEALION_API_KEY by default).
+                                  # Off by default — requests without a Bearer key are rejected.
+                                  # Override with env var: SEALION_ALLOW_ENV_KEY_FALLBACK=true.
+
+profiles:
+  standard:                        # general-purpose; default fallback and detection tasks
+    model: aisingapore/Gemma-SEA-LION-v4-27B-IT
+    temperature: 0.3
+    max_tokens: 1024
+
+  best-language:                   # higher-quality language output for translation/localization
+    model: aisingapore/Gemma-SEA-LION-v4-27B-IT
+    temperature: 0.2
+    max_tokens: 2048
+
+  reasoning:                       # extended thinking; reserved for future tools (v0.2+)
+    model: aisingapore/Llama-SEA-LION-v3.5-70B-R
+    temperature: 0.2
+    max_tokens: 4096
+    thinking_mode: "on"            # passed via chat_template_kwargs
+
+  safety:                          # SEA-Guard classifier; deterministic, short output
+    model: aisingapore/SEA-Guard   # alias; pin to Gemma-SEA-Guard-12B-2602 for explicit version
+    temperature: 0.0
+    max_tokens: 128
+
+routing:
+  default: standard
+  detect_language_variant: standard
+  translate_localize: best-language
+  safety_check: safety

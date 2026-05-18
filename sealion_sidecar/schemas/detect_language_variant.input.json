@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "detect_language_variant.input",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Text to analyze for language, variant, register, and code-switching."
+    }
+  },
+  "required": ["text"],
+  "additionalProperties": false
+}

@@ -1,0 +1,31 @@
+# Development tooling
+.venv/
+.git/
+.github/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+
+# Tests
+tests/
+
+# Secrets and local config — never bake into the image
+.env
+.env.*
+!.env.example
+*.local.yaml
+config.yaml
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Evals are not needed in the runtime image
+sealion_sidecar/evals/
+
+# Documentation and dev files
+CLAUDE.md
+.pre-commit-config.yaml
+.python-version

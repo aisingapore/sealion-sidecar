@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "safety_check.input",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": ["prompt_only", "prompt_response", "response_only"],
+      "description": "What to classify: a user request, a full interaction (judging the response), or just the AI response."
+    },
+    "prompt": {
+      "type": "string",
+      "description": "User request text. Required for prompt_only and prompt_response."
+    },
+    "response": {
+      "type": "string",
+      "description": "AI response text. Required for prompt_response and response_only."
+    }
+  },
+  "required": ["mode"],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {"properties": {"mode": {"const": "prompt_only"}}, "required": ["mode"]},
+      "then": {"required": ["prompt"]}
+    },
+    {
+      "if": {"properties": {"mode": {"const": "prompt_response"}}, "required": ["mode"]},
+      "then": {"required": ["prompt", "response"]}
+    },
+    {
+      "if": {"properties": {"mode": {"const": "response_only"}}, "required": ["mode"]},
+      "then": {"required": ["response"]}
+    }
+  ]
+}

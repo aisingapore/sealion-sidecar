@@ -1,0 +1,45 @@
+services:
+  sealion:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+
+    image: sealion-sidecar:latest
+
+    env_file:
+      - path: .env
+        required: false          # server still starts without .env if all clients supply Bearer keys
+
+    environment:
+      SEALION_CONFIG: /app/config.yaml
+      # Passed through from the host env / .env file.
+      # Only used when allow_env_key_fallback: true is set in config.yaml.
+      SEALION_API_KEY: ${SEALION_API_KEY:-}
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      # Mount the operator's config file read-only. The API key must NOT be
+      # in config.yaml — pass it as a request header from each MCP client.
+      - ./config.yaml:/app/config.yaml:ro
+
+    # TCP socket probe: avoids curl (absent from python:3.13-slim) and avoids
+    # HTTP 4xx from the MCP streamable-http endpoint on bare GET requests.
+    # A successful TCP connection proves the server is bound and accepting.
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import socket; s=socket.create_connection(('localhost', 8000), timeout=5); s.close()"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+    restart: unless-stopped
+
+    security_opt:
+      - no-new-privileges:true

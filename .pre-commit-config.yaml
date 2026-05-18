@@ -1,0 +1,11 @@
+# https://pre-commit.com
+# Install: `pre-commit install` (once per clone)
+# Run manually: `pre-commit run --all-files`
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.12
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format

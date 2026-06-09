@@ -23,7 +23,7 @@ dev = [
   "ruff==0.15.12",
 ]
 evals = [
-  "anthropic>=0.40",
+  "anthropic>=0.108.0",
 ]
 
 [project.scripts]
